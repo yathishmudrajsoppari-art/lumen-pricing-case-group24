@@ -28,7 +28,7 @@
       "price_history": {
         "promo_months": 1,
         "total_months": 12,
-        "avg_discount_pct": 1.67,
+        "avg_discount_pct_when_run": 20.0,
         "avg_shelf_price": 1.56
       }
     },
@@ -42,7 +42,7 @@
       "price_history": {
         "promo_months": 2,
         "total_months": 12,
-        "avg_discount_pct": 2.5,
+        "avg_discount_pct_when_run": 15.0,
         "avg_shelf_price": 1.06
       }
     },
@@ -56,7 +56,7 @@
       "price_history": {
         "promo_months": 1,
         "total_months": 12,
-        "avg_discount_pct": 1.25,
+        "avg_discount_pct_when_run": 15.0,
         "avg_shelf_price": 2.91
       }
     },
@@ -70,7 +70,7 @@
       "price_history": {
         "promo_months": 1,
         "total_months": 12,
-        "avg_discount_pct": 0.83,
+        "avg_discount_pct_when_run": 10.0,
         "avg_shelf_price": 2.37
       }
     }
@@ -496,9 +496,82 @@
       "quote": "One more canned drink option at the kiosk doesn't move me, I buy on habit."
     }
   ],
+  "city_launch_priority": [
+    {
+      "city": "Other Germany",
+      "population_share_of_market": 0.4,
+      "regional_cagr": 0.07,
+      "urban_wellness_share_of_city": 0.2357,
+      "priority_score": 0.1009
+    },
+    {
+      "city": "Berlin",
+      "population_share_of_market": 0.18,
+      "regional_cagr": 0.09,
+      "urban_wellness_share_of_city": 0.3333,
+      "priority_score": 0.0654
+    },
+    {
+      "city": "Munich",
+      "population_share_of_market": 0.15,
+      "regional_cagr": 0.09,
+      "urban_wellness_share_of_city": 0.2281,
+      "priority_score": 0.0373
+    },
+    {
+      "city": "Cologne",
+      "population_share_of_market": 0.09,
+      "regional_cagr": 0.07,
+      "urban_wellness_share_of_city": 0.3556,
+      "priority_score": 0.0342
+    },
+    {
+      "city": "Hamburg",
+      "population_share_of_market": 0.1,
+      "regional_cagr": 0.07,
+      "urban_wellness_share_of_city": 0.2708,
+      "priority_score": 0.029
+    },
+    {
+      "city": "Frankfurt",
+      "population_share_of_market": 0.08,
+      "regional_cagr": 0.07,
+      "urban_wellness_share_of_city": 0.1875,
+      "priority_score": 0.0161
+    }
+  ],
+  "cost_breakdown": [
+    {
+      "cost_component": "Ingredients (green tea caffeine + adaptogens)",
+      "cost_per_unit_eur": 0.21,
+      "pct_of_total": 33.9
+    },
+    {
+      "cost_component": "Can & packaging",
+      "cost_per_unit_eur": 0.14,
+      "pct_of_total": 22.6
+    },
+    {
+      "cost_component": "Co-packing / production",
+      "cost_per_unit_eur": 0.15,
+      "pct_of_total": 24.2
+    },
+    {
+      "cost_component": "Freight & logistics",
+      "cost_per_unit_eur": 0.07,
+      "pct_of_total": 11.3
+    },
+    {
+      "cost_component": "Germany import duty & compliance allowance",
+      "cost_per_unit_eur": 0.05,
+      "pct_of_total": 8.1
+    }
+  ],
   "data_quality_notes": [
     "4 exact duplicate rows removed from historical_sales_weekly.csv (Denmark 2025-09-22, Denmark 2025-12-22, Netherlands 2025-07-14, Netherlands 2026-04-27).",
     "Seasonality index recomputed on a per-week average basis, not a monthly sum, because Jan-Jun weeks are covered by both 2025 and 2026 in the 78-week window while Jul-Dec is covered once -- naive monthly sums overstate H1.",
-    "customer_survey.csv name/email columns were dropped before any aggregation and never reach this file or the app."
+    "customer_survey.csv name/email columns were dropped before any aggregation and never reach this file or the app.",
+    "cost_breakdown.csv contains a row labelled '[KPI, not a cost line]' holding the value 30.0 (blended gross margin %, not a euro cost). It is explicitly excluded from both the cost table and the COGS total (EUR0.62, which is verified as the sum of the 5 real cost lines) -- summing the column naively would silently corrupt every contribution-margin figure in this tool.",
+    "market_context.csv's 'Berlin/Munich assumed slightly faster given urban wellness segment concentration' note was checked against customer_survey.csv's actual city-level segment mix, not taken at face value: Munich's real Urban Wellness Professionals share (22.8%) is one of the lowest of the five named cities, while Cologne's (35.6%) is the highest -- the assumption holds for Berlin but not for Munich."
   ]
 }

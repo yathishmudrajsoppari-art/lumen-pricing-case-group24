@@ -38,8 +38,12 @@ body {
   border-bottom: 1px solid var(--line-strong);
 }
 
+.masthead-left { display: flex; flex-direction: column; }
+.brand-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.brand-mark { width: 22px; height: 22px; flex-shrink: 0; }
+
 .eyebrow {
-  margin: 0 0 6px;
+  margin: 0;
   font-size: 0.8rem;
   color: var(--botanical);
   font-weight: 600;
@@ -287,6 +291,32 @@ svg { width: 100%; height: auto; display: block; }
 }
 .recon-item .quote { font-style: italic; color: var(--ink); }
 .recon-item .segment-name { font-weight: 600; color: var(--ink-soft); font-size: 0.76rem; }
+
+.voice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.voice-card {
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  padding: 14px 16px;
+}
+.voice-card h3 { font-size: 0.9rem; margin: 0 0 10px; }
+.voice-line { display: flex; gap: 8px; margin-bottom: 8px; align-items: baseline; }
+.voice-tag {
+  flex-shrink: 0;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+.voice-tag.positive { background: var(--botanical-soft); color: var(--botanical); }
+.voice-tag.mixed { background: var(--gold-soft); color: var(--gold); }
+.voice-tag.negative { background: var(--clay-soft); color: var(--clay); }
+.voice-line p { margin: 0; font-size: 0.82rem; font-style: italic; color: var(--ink); }
 
 .footer {
   padding: 20px clamp(20px, 4vw, 56px) 40px;

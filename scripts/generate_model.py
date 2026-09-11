@@ -23,10 +23,16 @@ competitors = comp_summary.round(2).to_dict(orient="records")
 hist = pd.read_csv(D+"competitor_price_history.csv")
 promo = (hist.groupby("competitor")
          .agg(promo_months=("promo_active","sum"), total_months=("promo_active","count"),
-              avg_discount_pct=("promo_discount_pct","mean"), avg_shelf_price=("shelf_price_eur","mean"))
+              avg_shelf_price=("shelf_price_eur","mean"))
          .round(2).reset_index())
+# average discount computed only over months a promo actually ran -- averaging in the zero-discount
+# months as well (an earlier mistake, caught before this went into the app) makes real 10-20% promos
+# look like a meaningless 2-3%.
+promo_only_discount = (hist[hist["promo_active"]].groupby("competitor")["promo_discount_pct"]
+                        .mean().round(1))
+promo["avg_discount_pct_when_run"] = promo["competitor"].map(promo_only_discount).fillna(0)
 promo_dict = {r["competitor"]: {"promo_months": int(r["promo_months"]), "total_months": int(r["total_months"]),
-                                  "avg_discount_pct": r["avg_discount_pct"], "avg_shelf_price": r["avg_shelf_price"]}
+                                  "avg_discount_pct_when_run": r["avg_discount_pct_when_run"], "avg_shelf_price": r["avg_shelf_price"]}
               for _, r in promo.iterrows()}
 for c in competitors:
     c["price_history"] = promo_dict.get(c["competitor"], {})
@@ -113,7 +119,21 @@ mc = pd.read_csv(D+"market_context.csv")
 subcat = mc[mc["dimension_type"]=="subcategory"].pivot(index="year", columns="name", values="value")
 regions = mc[mc["dimension_type"]=="region"].pivot(index="name", columns="metric", values="value")
 
-# ---------- Price test (given, verbatim) ----------
+# ---------- City launch priority (uses market_context regions + survey city field, both previously unused) ----------
+regions_df = mc[mc["dimension_type"]=="region"].pivot(index="name", columns="metric", values="value")
+city_segment = pd.crosstab(survey["city"], survey["segment"], normalize="index")
+regions_df["urban_wellness_share_of_city"] = city_segment["Urban Wellness Professionals"]
+regions_df["priority_score"] = (regions_df["population_share_of_market"] * regions_df["urban_wellness_share_of_city"]
+                                  * (1 + regions_df["regional_cagr"]))
+regions_df = regions_df.round(4).sort_values("priority_score", ascending=False)
+city_priority = regions_df.reset_index().rename(columns={"name":"city"}).to_dict(orient="records")
+
+# ---------- cost breakdown (with the KPI trap row explicitly excluded, not just implicitly) ----------
+cost_df = pd.read_csv(D+"cost_breakdown.csv")
+real_cost_lines = cost_df[~cost_df["cost_component"].str.contains(r"\[KPI", na=False, regex=True)]
+real_cost_lines = real_cost_lines[~real_cost_lines["cost_component"].str.startswith("TOTAL")]
+cost_breakdown = real_cost_lines[["cost_component","cost_per_unit_eur","pct_of_total"]].to_dict(orient="records")
+
 price_test = pd.read_csv(D+"price_test_results.csv").to_dict(orient="records")
 
 # ---------- Quotes ----------
@@ -138,10 +158,14 @@ model = {
     "regions": regions.round(3).to_dict(orient="index"),
     "price_test_results": price_test,
     "customer_quotes": quotes,
+    "city_launch_priority": city_priority,
+    "cost_breakdown": cost_breakdown,
     "data_quality_notes": [
         "4 exact duplicate rows removed from historical_sales_weekly.csv (Denmark 2025-09-22, Denmark 2025-12-22, Netherlands 2025-07-14, Netherlands 2026-04-27).",
         "Seasonality index recomputed on a per-week average basis, not a monthly sum, because Jan-Jun weeks are covered by both 2025 and 2026 in the 78-week window while Jul-Dec is covered once -- naive monthly sums overstate H1.",
-        "customer_survey.csv name/email columns were dropped before any aggregation and never reach this file or the app."
+        "customer_survey.csv name/email columns were dropped before any aggregation and never reach this file or the app.",
+        "cost_breakdown.csv contains a row labelled '[KPI, not a cost line]' holding the value 30.0 (blended gross margin %, not a euro cost). It is explicitly excluded from both the cost table and the COGS total (EUR0.62, which is verified as the sum of the 5 real cost lines) -- summing the column naively would silently corrupt every contribution-margin figure in this tool.",
+        "market_context.csv's 'Berlin/Munich assumed slightly faster given urban wellness segment concentration' note was checked against customer_survey.csv's actual city-level segment mix, not taken at face value: Munich's real Urban Wellness Professionals share (22.8%) is one of the lowest of the five named cities, while Cologne's (35.6%) is the highest -- the assumption holds for Berlin but not for Munich."
     ]
 }
 
