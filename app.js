@@ -215,6 +215,14 @@ function renderPositioningMap() {
   legend.innerHTML = SEGMENT_ORDER.map((name) => `
     <span class="legend-item"><span class="legend-swatch" style="background:${bandColors[name]}"></span>${name} ceiling: €${MODEL.segments[name].van_westendorp.pme.toFixed(2)}</span>
   `).join("");
+
+  const promoLines = MODEL.competitors.map((c) => {
+    const h = c.price_history;
+    if (!h || !h.total_months) return null;
+    return `${c.competitor} discounted ${h.promo_months}/${h.total_months} months (avg ${h.avg_discount_pct_when_run.toFixed(0)}% off, when they did)`;
+  }).filter(Boolean);
+  document.getElementById("promo-note").textContent =
+    `Last 12 months of competitor pricing: ${promoLines.join(" · ")}. The Students & Budget-Conscious segment explicitly says promo timing decides their purchase — mass-market PulsUp discounts most often, premium players almost never do.`;
 }
 
 function renderStatStrip() {
@@ -292,6 +300,55 @@ function renderSeasonality() {
 
   document.getElementById("seas-corr").textContent = MODEL.seasonality_correlation;
   document.getElementById("temp-corr").textContent = MODEL.temperature_correlation;
+}
+
+function renderCityChart() {
+  const svg = document.getElementById("city-chart");
+  const W = 720, H = 260, PAD_L = 130, PAD = 24;
+  const data = MODEL.city_launch_priority;
+  const maxScore = Math.max(...data.map(d => d.priority_score));
+  const rowH = (H - 2 * PAD) / data.length;
+  const barMaxW = W - PAD_L - PAD - 190;
+
+  let content = "";
+  data.forEach((d, i) => {
+    const y = PAD + i * rowH + rowH * 0.2;
+    const bw = (d.priority_score / maxScore) * barMaxW;
+    const isNamed = d.city !== "Other Germany";
+    content += `<text x="${PAD_L - 10}" y="${y + rowH*0.3}" text-anchor="end" font-size="12" fill="var(--ink)" font-weight="${isNamed ? 600 : 400}">${d.city}</text>`;
+    content += `<rect x="${PAD_L}" y="${y}" width="${bw}" height="${rowH*0.55}" fill="${isNamed ? 'var(--botanical)' : 'var(--line-strong)'}" opacity="${isNamed ? 1 : 0.6}"/>`;
+    content += `<text x="${PAD_L + bw + 8}" y="${y + rowH*0.3}" font-size="11" fill="var(--ink-soft)">${(d.urban_wellness_share_of_city*100).toFixed(0)}% Urban Wellness · ${(d.regional_cagr*100).toFixed(0)}% CAGR</text>`;
+  });
+  svg.innerHTML = content;
+
+  const munich = data.find(d => d.city === "Munich");
+  const cologne = data.find(d => d.city === "Cologne");
+  document.getElementById("city-callout").textContent =
+    `Berlin ranks first on the combined score. But note: Munich's own Urban Wellness concentration (${(munich.urban_wellness_share_of_city*100).toFixed(0)}%) is lower than Cologne's (${(cologne.urban_wellness_share_of_city*100).toFixed(0)}%) despite the case materials assuming Berlin and Munich grow together — Munich's ranking here comes from its market size and growth rate, not from having more of the target segment.`;
+}
+
+function renderVoiceOfCustomer() {
+  const grid = document.getElementById("voice-grid");
+  const bySegment = {};
+  MODEL.customer_quotes.forEach((q) => {
+    if (!bySegment[q.segment]) bySegment[q.segment] = [];
+    bySegment[q.segment].push(q);
+  });
+  const order = { positive: 0, mixed: 1, negative: 2 };
+  grid.innerHTML = SEGMENT_ORDER.map((seg) => {
+    const qs = (bySegment[seg] || []).slice().sort((a,b) => order[a.sentiment]-order[b.sentiment]);
+    return `
+      <div class="voice-card">
+        <h3>${seg}</h3>
+        ${qs.map(q => `
+          <div class="voice-line">
+            <span class="voice-tag ${q.sentiment}">${q.sentiment}</span>
+            <p>"${q.quote}"</p>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }).join("");
 }
 
 function reconciliation() {
@@ -432,6 +489,8 @@ async function init() {
   MODEL = await res.json();
   renderPriceMarks();
   renderMethodologyNotes();
+  renderCityChart();
+  renderVoiceOfCustomer();
   reconciliation();
   wireControls();
   renderAll();

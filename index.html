@@ -14,7 +14,13 @@
 
 <header class="masthead">
   <div class="masthead-left">
-    <p class="eyebrow">LUMEN → Germany</p>
+    <div class="brand-row">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 4 C20 4 9 14 9 23 C9 30 14 35 20 35 C26 35 31 30 31 23 C31 14 20 4 20 4 Z" fill="none" stroke="var(--botanical)" stroke-width="2"/>
+        <path d="M20 12 C20 12 14 19 14 24.5 C14 28.5 16.7 31.5 20 31.5" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+      </svg>
+      <p class="eyebrow">LUMEN → Germany</p>
+    </div>
     <h1>Price, channel, and what you give up to get there.</h1>
   </div>
   <div class="masthead-right">
@@ -80,6 +86,7 @@
       <p class="panel-sub">LUMEN vs. the four competitors already on German shelves. Shaded bands show each segment's Van Westendorp range — the stated ceiling before a price reads as "too expensive."</p>
       <svg id="positioning-map" viewBox="0 0 720 340" role="img" aria-label="Positioning map of price versus marketing investment"></svg>
       <div class="legend" id="map-legend"></div>
+      <p class="hint" id="promo-note"></p>
     </div>
 
     <div class="stat-strip" id="stat-strip"></div>
@@ -103,6 +110,19 @@
       <p class="tradeoff-line" id="tradeoff-line"></p>
     </div>
 
+    <div class="panel" id="panel-cities">
+      <h2>Where to launch first, if it's a phased rollout</h2>
+      <p class="panel-sub">Combines each city's share of the national market and regional growth rate with its <em>actual</em> concentration of the Urban Wellness Professionals segment, measured directly from the survey — not assumed.</p>
+      <svg id="city-chart" viewBox="0 0 720 260" role="img" aria-label="City launch priority ranking"></svg>
+      <p class="hint" id="city-callout"></p>
+    </div>
+
+    <div class="panel qual-quant">
+      <h2>Voice of the customer, by segment</h2>
+      <p class="panel-sub">All 12 verbatims from the exhibit — one positive, one mixed, one negative per segment — so a strong quote can't stand in for the whole segment.</p>
+      <div id="voice-grid" class="voice-grid"></div>
+    </div>
+
     <div class="panel qual-quant">
       <h2>Where the numbers and the quotes disagree</h2>
       <div id="reconciliation"></div>
@@ -116,6 +136,7 @@
     <summary>Data &amp; methodology notes</summary>
     <ul id="methodology-notes"></ul>
     <p>Personal fields (name, email) from <code>customer_survey.csv</code> are stripped before this app ever sees the data — only aggregated segment statistics are loaded. No API key is required for anything on this page; the optional weather overlay calls Open-Meteo's public endpoint directly from your browser.</p>
+    <p><strong>Real-world context we checked, but didn't bake into the model:</strong> the case's ~€9.1bn/~7% CAGR German functional-beverage market size lines up with independently published 2026 estimates (Market Research Future, and others converging in the €/$9–9.2bn range) — the market-sizing exhibit isn't an arbitrary number. Separately, German law requires a mandatory €0.25 Pfand deposit on single-use cans like LUMEN's, refunded on return — it's not LUMEN's revenue or cost, but it does raise the amount a shopper hands over at checkout, which is worth flagging for the grab-and-go/kiosk moment the Commuters segment describes, even though none of the survey's price questions appear to have priced it in explicitly.</p>
   </details>
 </footer>
 
