@@ -1,0 +1,504 @@
+{
+  "cogs_per_unit_eur": 0.62,
+  "channel_formulas": {
+    "DTC Online": {
+      "slope": 0.971,
+      "intercept": -0.35,
+      "label": "Direct-to-consumer (own site)"
+    },
+    "Retail/Grocery": {
+      "slope": 0.57,
+      "intercept": 0.0,
+      "label": "Supermarkets & grocery"
+    },
+    "Gym & Office": {
+      "slope": 0.8,
+      "intercept": 0.0,
+      "label": "Gyms, offices, vending"
+    }
+  },
+  "competitors": [
+    {
+      "competitor": "Mate Libre",
+      "positioning": "Heritage / loyal niche",
+      "avg_price": 1.6,
+      "min_price": 1.37,
+      "max_price": 1.83,
+      "marketing_spend_index": 40,
+      "price_history": {
+        "promo_months": 1,
+        "total_months": 12,
+        "avg_discount_pct": 1.67,
+        "avg_shelf_price": 1.56
+      }
+    },
+    {
+      "competitor": "PulsUp",
+      "positioning": "Mass market",
+      "avg_price": 1.09,
+      "min_price": 0.96,
+      "max_price": 1.28,
+      "marketing_spend_index": 100,
+      "price_history": {
+        "promo_months": 2,
+        "total_months": 12,
+        "avg_discount_pct": 2.5,
+        "avg_shelf_price": 1.06
+      }
+    },
+    {
+      "competitor": "Root & Rise",
+      "positioning": "Boutique adaptogenic",
+      "avg_price": 2.85,
+      "min_price": 2.54,
+      "max_price": 3.11,
+      "marketing_spend_index": 15,
+      "price_history": {
+        "promo_months": 1,
+        "total_months": 12,
+        "avg_discount_pct": 1.25,
+        "avg_shelf_price": 2.91
+      }
+    },
+    {
+      "competitor": "VoltFit",
+      "positioning": "Premium performance",
+      "avg_price": 2.41,
+      "min_price": 2.1,
+      "max_price": 2.72,
+      "marketing_spend_index": 85,
+      "price_history": {
+        "promo_months": 1,
+        "total_months": 12,
+        "avg_discount_pct": 0.83,
+        "avg_shelf_price": 2.37
+      }
+    }
+  ],
+  "segments": {
+    "Fitness & Gym-Goers": {
+      "n": 83.0,
+      "avg_age": 26.55,
+      "avg_spend": 20.11,
+      "avg_freq": 6.23,
+      "avg_sensitivity": 5.44,
+      "avg_intent": 7.97,
+      "share_pct": 19.8,
+      "channel_pref": {
+        "DTC Online": 0.169,
+        "Gym & Office": 0.446,
+        "Retail/Grocery": 0.386
+      },
+      "van_westendorp": {
+        "pmc": 1.24,
+        "opp": 1.24,
+        "idpp": 2.03,
+        "pme": 2.09
+      }
+    },
+    "On-the-go Commuters": {
+      "n": 90.0,
+      "avg_age": 38.12,
+      "avg_spend": 19.97,
+      "avg_freq": 5.87,
+      "avg_sensitivity": 5.98,
+      "avg_intent": 6.71,
+      "share_pct": 21.4,
+      "channel_pref": {
+        "DTC Online": 0.167,
+        "Gym & Office": 0.233,
+        "Retail/Grocery": 0.6
+      },
+      "van_westendorp": {
+        "pmc": 1.2,
+        "opp": 1.2,
+        "idpp": 1.69,
+        "pme": 1.74
+      }
+    },
+    "Students & Budget-Conscious": {
+      "n": 135.0,
+      "avg_age": 21.08,
+      "avg_spend": 17.24,
+      "avg_freq": 5.1,
+      "avg_sensitivity": 7.93,
+      "avg_intent": 5.5,
+      "share_pct": 32.1,
+      "channel_pref": {
+        "DTC Online": 0.222,
+        "Gym & Office": 0.237,
+        "Retail/Grocery": 0.541
+      },
+      "van_westendorp": {
+        "pmc": 0.93,
+        "opp": 0.93,
+        "idpp": 1.32,
+        "pme": 1.42
+      }
+    },
+    "Urban Wellness Professionals": {
+      "n": 112.0,
+      "avg_age": 31.98,
+      "avg_spend": 21.73,
+      "avg_freq": 7.56,
+      "avg_sensitivity": 3.63,
+      "avg_intent": 9.12,
+      "share_pct": 26.7,
+      "channel_pref": {
+        "DTC Online": 0.536,
+        "Gym & Office": 0.143,
+        "Retail/Grocery": 0.321
+      },
+      "van_westendorp": {
+        "pmc": 1.5,
+        "opp": 1.5,
+        "idpp": 2.07,
+        "pme": 2.08
+      }
+    }
+  },
+  "van_westendorp_all": {
+    "pmc": 1.37,
+    "opp": 1.5,
+    "idpp": 1.73,
+    "pme": 1.95
+  },
+  "city_distribution_pct": {
+    "Other Germany": 37.4,
+    "Berlin": 19.3,
+    "Munich": 13.6,
+    "Hamburg": 11.4,
+    "Cologne": 10.7,
+    "Frankfurt": 7.6
+  },
+  "marketing_channels": [
+    {
+      "channel": "Influencer / Content",
+      "total_conversions": 2258,
+      "total_spend": 84732.86,
+      "avg_ltv": 100.82,
+      "total_reach": 636397,
+      "blended_cac": 37.53,
+      "ltv_cac_ratio": 2.69,
+      "conv_rate_of_reach_pct": 0.36
+    },
+    {
+      "channel": "Paid Social",
+      "total_conversions": 952,
+      "total_spend": 43588.69,
+      "avg_ltv": 132.14,
+      "total_reach": 880877,
+      "blended_cac": 45.79,
+      "ltv_cac_ratio": 2.89,
+      "conv_rate_of_reach_pct": 0.11
+    },
+    {
+      "channel": "Referral / Subscription",
+      "total_conversions": 11452,
+      "total_spend": 322241.25,
+      "avg_ltv": 81.39,
+      "total_reach": 661294,
+      "blended_cac": 28.14,
+      "ltv_cac_ratio": 2.89,
+      "conv_rate_of_reach_pct": 1.73
+    },
+    {
+      "channel": "Retail Sampling",
+      "total_conversions": 12080,
+      "total_spend": 726327.24,
+      "avg_ltv": 174.17,
+      "total_reach": 561380,
+      "blended_cac": 60.13,
+      "ltv_cac_ratio": 2.9,
+      "conv_rate_of_reach_pct": 2.15
+    }
+  ],
+  "blended_cac": 44.01,
+  "blended_ltv": 126.32,
+  "seasonality": [
+    {
+      "month": 1,
+      "seasonality_index_100_avg": 78,
+      "avg_temp_germany_celsius": 2,
+      "actual_demand_index": 72.6
+    },
+    {
+      "month": 2,
+      "seasonality_index_100_avg": 80,
+      "avg_temp_germany_celsius": 3,
+      "actual_demand_index": 76.3
+    },
+    {
+      "month": 3,
+      "seasonality_index_100_avg": 88,
+      "avg_temp_germany_celsius": 7,
+      "actual_demand_index": 84.6
+    },
+    {
+      "month": 4,
+      "seasonality_index_100_avg": 98,
+      "avg_temp_germany_celsius": 11,
+      "actual_demand_index": 97.9
+    },
+    {
+      "month": 5,
+      "seasonality_index_100_avg": 118,
+      "avg_temp_germany_celsius": 15,
+      "actual_demand_index": 120.4
+    },
+    {
+      "month": 6,
+      "seasonality_index_100_avg": 132,
+      "avg_temp_germany_celsius": 18,
+      "actual_demand_index": 135.9
+    },
+    {
+      "month": 7,
+      "seasonality_index_100_avg": 138,
+      "avg_temp_germany_celsius": 19,
+      "actual_demand_index": 133.5
+    },
+    {
+      "month": 8,
+      "seasonality_index_100_avg": 128,
+      "avg_temp_germany_celsius": 19,
+      "actual_demand_index": 119.4
+    },
+    {
+      "month": 9,
+      "seasonality_index_100_avg": 104,
+      "avg_temp_germany_celsius": 15,
+      "actual_demand_index": 100.3
+    },
+    {
+      "month": 10,
+      "seasonality_index_100_avg": 90,
+      "avg_temp_germany_celsius": 11,
+      "actual_demand_index": 90.0
+    },
+    {
+      "month": 11,
+      "seasonality_index_100_avg": 82,
+      "avg_temp_germany_celsius": 6,
+      "actual_demand_index": 83.5
+    },
+    {
+      "month": 12,
+      "seasonality_index_100_avg": 84,
+      "avg_temp_germany_celsius": 3,
+      "actual_demand_index": 85.5
+    }
+  ],
+  "seasonality_correlation": 0.985,
+  "temperature_correlation": 0.929,
+  "channel_mix_home_markets_pct": {
+    "DTC Online": 31.9,
+    "Gym & Office": 17.9,
+    "Retail/Grocery": 50.2
+  },
+  "promo_lift_avg_units": {
+    "false": 1692.7,
+    "true": 1938.5
+  },
+  "market_size_by_subcategory_eur": {
+    "Energy / focus": {
+      "2022": 1943857000.0,
+      "2023": 2079926990.0,
+      "2024": 2225521880.0,
+      "2025": 2381308411.0,
+      "2026": 2548000000.0,
+      "2027": 2726360000.0
+    },
+    "Hydration": {
+      "2022": 2152127393.0,
+      "2023": 2302776311.0,
+      "2024": 2463970652.0,
+      "2025": 2636448598.0,
+      "2026": 2821000000.0,
+      "2027": 3018470000.0
+    },
+    "Other functional": {
+      "2022": 1180198893.0,
+      "2023": 1262812816.0,
+      "2024": 1351209713.0,
+      "2025": 1445794393.0,
+      "2026": 1547000000.0,
+      "2027": 1655290000.0
+    },
+    "Plant-based / adaptogenic": {
+      "2022": 1666163143.0,
+      "2023": 1782794563.0,
+      "2024": 1907590183.0,
+      "2025": 2041121495.0,
+      "2026": 2184000000.0,
+      "2027": 2336880000.0
+    }
+  },
+  "regions": {
+    "Berlin": {
+      "population_share_of_market": 0.18,
+      "regional_cagr": 0.09
+    },
+    "Cologne": {
+      "population_share_of_market": 0.09,
+      "regional_cagr": 0.07
+    },
+    "Frankfurt": {
+      "population_share_of_market": 0.08,
+      "regional_cagr": 0.07
+    },
+    "Hamburg": {
+      "population_share_of_market": 0.1,
+      "regional_cagr": 0.07
+    },
+    "Munich": {
+      "population_share_of_market": 0.15,
+      "regional_cagr": 0.09
+    },
+    "Other Germany": {
+      "population_share_of_market": 0.4,
+      "regional_cagr": 0.07
+    }
+  },
+  "price_test_results": [
+    {
+      "price_eur": 1.79,
+      "channel": "DTC Online",
+      "estimated_acceptance_pct_of_survey": 61.7,
+      "net_price_to_lumen_eur": 1.39,
+      "unit_contribution_eur": 0.77,
+      "contribution_margin_pct": 55.3
+    },
+    {
+      "price_eur": 1.79,
+      "channel": "Retail/Grocery",
+      "estimated_acceptance_pct_of_survey": 61.7,
+      "net_price_to_lumen_eur": 1.02,
+      "unit_contribution_eur": 0.4,
+      "contribution_margin_pct": 39.2
+    },
+    {
+      "price_eur": 1.79,
+      "channel": "Gym & Office",
+      "estimated_acceptance_pct_of_survey": 61.7,
+      "net_price_to_lumen_eur": 1.43,
+      "unit_contribution_eur": 0.81,
+      "contribution_margin_pct": 56.7
+    },
+    {
+      "price_eur": 2.19,
+      "channel": "DTC Online",
+      "estimated_acceptance_pct_of_survey": 51.7,
+      "net_price_to_lumen_eur": 1.78,
+      "unit_contribution_eur": 1.16,
+      "contribution_margin_pct": 65.1
+    },
+    {
+      "price_eur": 2.19,
+      "channel": "Retail/Grocery",
+      "estimated_acceptance_pct_of_survey": 51.7,
+      "net_price_to_lumen_eur": 1.25,
+      "unit_contribution_eur": 0.63,
+      "contribution_margin_pct": 50.3
+    },
+    {
+      "price_eur": 2.19,
+      "channel": "Gym & Office",
+      "estimated_acceptance_pct_of_survey": 51.7,
+      "net_price_to_lumen_eur": 1.75,
+      "unit_contribution_eur": 1.13,
+      "contribution_margin_pct": 64.6
+    },
+    {
+      "price_eur": 2.59,
+      "channel": "DTC Online",
+      "estimated_acceptance_pct_of_survey": 26.7,
+      "net_price_to_lumen_eur": 2.16,
+      "unit_contribution_eur": 1.54,
+      "contribution_margin_pct": 71.4
+    },
+    {
+      "price_eur": 2.59,
+      "channel": "Retail/Grocery",
+      "estimated_acceptance_pct_of_survey": 26.7,
+      "net_price_to_lumen_eur": 1.48,
+      "unit_contribution_eur": 0.86,
+      "contribution_margin_pct": 58.0
+    },
+    {
+      "price_eur": 2.59,
+      "channel": "Gym & Office",
+      "estimated_acceptance_pct_of_survey": 26.7,
+      "net_price_to_lumen_eur": 2.07,
+      "unit_contribution_eur": 1.45,
+      "contribution_margin_pct": 70.1
+    }
+  ],
+  "customer_quotes": [
+    {
+      "segment": "Students & Budget-Conscious",
+      "sentiment": "positive",
+      "quote": "If it's on promo near the exam period I'll grab a pack, otherwise it's a stretch."
+    },
+    {
+      "segment": "Students & Budget-Conscious",
+      "sentiment": "negative",
+      "quote": "Honestly 2,50EUR for a can is a hard no on a student budget, whatever is inside it."
+    },
+    {
+      "segment": "Students & Budget-Conscious",
+      "sentiment": "mixed",
+      "quote": "I like the idea but I'd only buy it if my usual energy drink was sold out."
+    },
+    {
+      "segment": "Urban Wellness Professionals",
+      "sentiment": "positive",
+      "quote": "I switched most of my afternoon coffee runs to something like this, I don't mind paying more for clean ingredients."
+    },
+    {
+      "segment": "Urban Wellness Professionals",
+      "sentiment": "positive",
+      "quote": "The adaptogen angle is what gets me, not the caffeine."
+    },
+    {
+      "segment": "Urban Wellness Professionals",
+      "sentiment": "negative",
+      "quote": "Too many wellness brands taste like medicine, that's the real risk here, not the price."
+    },
+    {
+      "segment": "Fitness & Gym-Goers",
+      "sentiment": "positive",
+      "quote": "If it performs like VoltFit but tastes better I'm switching immediately."
+    },
+    {
+      "segment": "Fitness & Gym-Goers",
+      "sentiment": "mixed",
+      "quote": "I care about the caffeine source but I'm not going to overpay just for a nicer can."
+    },
+    {
+      "segment": "Fitness & Gym-Goers",
+      "sentiment": "negative",
+      "quote": "My gym already sells three energy drinks, it needs a real reason to take shelf space."
+    },
+    {
+      "segment": "On-the-go Commuters",
+      "sentiment": "positive",
+      "quote": "Grab and go is everything for me, if it's not at the kiosk near the station I'll never try it."
+    },
+    {
+      "segment": "On-the-go Commuters",
+      "sentiment": "mixed",
+      "quote": "I'd try it once out of curiosity, repeat purchase depends entirely on taste."
+    },
+    {
+      "segment": "On-the-go Commuters",
+      "sentiment": "negative",
+      "quote": "One more canned drink option at the kiosk doesn't move me, I buy on habit."
+    }
+  ],
+  "data_quality_notes": [
+    "4 exact duplicate rows removed from historical_sales_weekly.csv (Denmark 2025-09-22, Denmark 2025-12-22, Netherlands 2025-07-14, Netherlands 2026-04-27).",
+    "Seasonality index recomputed on a per-week average basis, not a monthly sum, because Jan-Jun weeks are covered by both 2025 and 2026 in the 78-week window while Jul-Dec is covered once -- naive monthly sums overstate H1.",
+    "customer_survey.csv name/email columns were dropped before any aggregation and never reach this file or the app."
+  ]
+}

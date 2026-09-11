@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LUMEN → Germany — Decision Cockpit</title>
+<meta name="description" content="Price, channel, and timing simulator for LUMEN's Germany launch, built from the ATELIA x ESCP LUMEN case data." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-left">
+    <p class="eyebrow">LUMEN → Germany</p>
+    <h1>Price, channel, and what you give up to get there.</h1>
+  </div>
+  <div class="masthead-right">
+    <p class="tag" id="group-tag">Decision cockpit — pricing &amp; go-to-market</p>
+  </div>
+</header>
+
+<main class="cockpit">
+
+  <!-- LEFT RAIL: CONTROLS -->
+  <section class="rail" aria-label="Controls">
+
+    <div class="control-block">
+      <div class="control-label-row">
+        <label for="dial">Whose brief are you optimizing for?</label>
+        <span class="control-readout" id="dial-readout">Balanced</span>
+      </div>
+      <input type="range" id="dial" min="0" max="100" value="50" step="1" />
+      <div class="dial-ends">
+        <span>Elena — fast payback</span>
+        <span>Jonas — premium</span>
+      </div>
+    </div>
+
+    <div class="control-block">
+      <div class="control-label-row">
+        <label for="price">Retail price</label>
+        <span class="control-readout" id="price-readout">€1.99</span>
+      </div>
+      <input type="range" id="price" min="0.99" max="3.29" value="1.99" step="0.01" />
+      <div class="price-marks" id="price-marks"></div>
+    </div>
+
+    <div class="control-block">
+      <div class="control-label-row">
+        <label>Launch channel mix</label>
+        <span class="control-readout" id="mix-readout">100%</span>
+      </div>
+      <div class="mix-sliders" id="mix-sliders"></div>
+      <p class="hint">Drag one channel — the others rebalance to keep the mix at 100%.</p>
+    </div>
+
+    <div class="control-block">
+      <div class="control-label-row">
+        <label for="launch-month">Launch month</label>
+        <span class="control-readout" id="month-readout">May</span>
+      </div>
+      <input type="range" id="launch-month" min="1" max="12" value="5" step="1" />
+    </div>
+
+    <div class="control-block weather-block">
+      <button id="weather-btn" class="secondary-btn">Overlay live German weather</button>
+      <p class="hint" id="weather-status">Optional — pulls current temperature for Berlin, Munich &amp; Hamburg from Open-Meteo (no key required) and checks it against the historical pattern below.</p>
+    </div>
+
+  </section>
+
+  <!-- RIGHT: VISUAL COCKPIT -->
+  <section class="canvas" aria-label="Analysis">
+
+    <div class="panel" id="panel-map">
+      <h2>Where this price sits</h2>
+      <p class="panel-sub">LUMEN vs. the four competitors already on German shelves. Shaded bands show each segment's Van Westendorp range — the stated ceiling before a price reads as "too expensive."</p>
+      <svg id="positioning-map" viewBox="0 0 720 340" role="img" aria-label="Positioning map of price versus marketing investment"></svg>
+      <div class="legend" id="map-legend"></div>
+    </div>
+
+    <div class="stat-strip" id="stat-strip"></div>
+
+    <div class="panel" id="panel-segments">
+      <h2>Who this price actually reaches</h2>
+      <p class="panel-sub">Share of each segment whose stated ceiling is at or above the current price, next to how much they say they'd actually spend and where they prefer to buy.</p>
+      <div class="segment-grid" id="segment-grid"></div>
+    </div>
+
+    <div class="panel" id="panel-seasonality">
+      <h2>Timing: demand isn't flat across the year</h2>
+      <p class="panel-sub">Built from LUMEN's own NL/DK/SE sales, corrected for uneven week-coverage across the 78-week window — correlation with the seasonality index: <strong id="seas-corr"></strong>, with German temperature: <strong id="temp-corr"></strong>.</p>
+      <svg id="seasonality-chart" viewBox="0 0 720 260" role="img" aria-label="Seasonal demand pattern by month"></svg>
+      <p class="hint" id="live-weather-readout"></p>
+    </div>
+
+    <div class="panel recommendation" id="panel-recommendation">
+      <h2>What this means for Freya</h2>
+      <p id="recommendation-text">—</p>
+      <p class="tradeoff-line" id="tradeoff-line"></p>
+    </div>
+
+    <div class="panel qual-quant">
+      <h2>Where the numbers and the quotes disagree</h2>
+      <div id="reconciliation"></div>
+    </div>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <details>
+    <summary>Data &amp; methodology notes</summary>
+    <ul id="methodology-notes"></ul>
+    <p>Personal fields (name, email) from <code>customer_survey.csv</code> are stripped before this app ever sees the data — only aggregated segment statistics are loaded. No API key is required for anything on this page; the optional weather overlay calls Open-Meteo's public endpoint directly from your browser.</p>
+  </details>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
