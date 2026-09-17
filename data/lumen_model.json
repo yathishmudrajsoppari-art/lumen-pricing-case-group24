@@ -300,6 +300,7 @@
     "false": 1692.7,
     "true": 1938.5
   },
+  "promo_lift_pct": 14.5,
   "market_size_by_subcategory_eur": {
     "Energy / focus": {
       "2022": 1943857000.0,

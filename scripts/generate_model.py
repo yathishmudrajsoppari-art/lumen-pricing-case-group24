@@ -113,6 +113,7 @@ channel_mix_home = sales.groupby("channel")["units_sold"].sum()
 channel_mix_home_pct = (100*channel_mix_home/channel_mix_home.sum()).round(1).to_dict()
 
 promo_lift = sales.groupby("promo_active")["units_sold"].mean().round(1).to_dict()
+promo_lift_pct = round((promo_lift[True] / promo_lift[False] - 1) * 100, 1)
 
 # ---------- Market context ----------
 mc = pd.read_csv(D+"market_context.csv")
@@ -154,6 +155,7 @@ model = {
     "temperature_correlation": correlation_temp,
     "channel_mix_home_markets_pct": channel_mix_home_pct,
     "promo_lift_avg_units": promo_lift,
+    "promo_lift_pct": promo_lift_pct,
     "market_size_by_subcategory_eur": subcat.round(0).to_dict(),
     "regions": regions.round(3).to_dict(orient="index"),
     "price_test_results": price_test,

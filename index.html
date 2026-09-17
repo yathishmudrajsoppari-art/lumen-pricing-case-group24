@@ -60,7 +60,9 @@
         <span class="control-readout" id="mix-readout">100%</span>
       </div>
       <div class="mix-sliders" id="mix-sliders"></div>
+      <p class="hint" id="home-mix-reference"></p>
       <p class="hint">Drag one channel — the others rebalance to keep the mix at 100%.</p>
+      <p class="hint" id="home-market-mix-note"></p>
     </div>
 
     <div class="control-block">
@@ -102,6 +104,7 @@
       <p class="panel-sub">Built from LUMEN's own NL/DK/SE sales, corrected for uneven week-coverage across the 78-week window — correlation with the seasonality index: <strong id="seas-corr"></strong>, with German temperature: <strong id="temp-corr"></strong>.</p>
       <svg id="seasonality-chart" viewBox="0 0 720 260" role="img" aria-label="Seasonal demand pattern by month"></svg>
       <p class="hint" id="live-weather-readout"></p>
+      <p class="hint" id="promo-lift-note"></p>
     </div>
 
     <div class="panel recommendation" id="panel-recommendation">
@@ -121,6 +124,18 @@
       <h2>Voice of the customer, by segment</h2>
       <p class="panel-sub">All 12 verbatims from the exhibit — one positive, one mixed, one negative per segment — so a strong quote can't stand in for the whole segment.</p>
       <div id="voice-grid" class="voice-grid"></div>
+    </div>
+
+    <div class="panel" id="panel-cost">
+      <h2>What's actually in €0.62 of cost</h2>
+      <p class="panel-sub">The five real cost lines behind every contribution-margin number above — <code>cost_breakdown.csv</code> also contains a KPI row (30.0, a margin percentage) that is deliberately excluded here, not summed in.</p>
+      <div id="cost-bars" class="cost-bars"></div>
+    </div>
+
+    <div class="panel" id="panel-marketing">
+      <h2>Which acquisition channel actually pays back fastest</h2>
+      <p class="panel-sub">A different "channel" than the launch mix above — this is how marketing spend turns into a customer, not where the product is sold. Retail Sampling costs the most to acquire but returns the most; Referral is cheapest but shallowest.</p>
+      <div id="marketing-grid" class="marketing-grid"></div>
     </div>
 
     <div class="panel qual-quant">

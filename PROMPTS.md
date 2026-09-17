@@ -118,3 +118,58 @@ worth recording:
    pan-European and open-ended by design) -- moot, since the team had already committed to
    LUMEN.
 
+## Fourth pass: expanding the still-unused exhibits, and a bug in our own new code
+
+Asked for a full audit of which exhibits were computed into the model versus actually visible
+in the UI. Four fields were sitting unused: the per-channel marketing funnel breakdown, the
+5-line cost structure behind the €0.62 COGS, the home markets' actual DTC/Retail/Gym split,
+and the promo-lift figure. Requested all four be surfaced, which added two new panels (cost
+structure, marketing-channel efficiency) and two inline reference notes (home-market mix,
+promo lift tied to the Students segment's own quote and the competitor promo data already
+shown).
+
+While building this, found that an earlier, separate attempt at the same two panels (from
+before this session's context was trimmed) had been left in the file alongside the new one --
+duplicate `panel-cost`/`panel-marketing` `id`s, a duplicate `promo-lift-note` id, and dead
+`renderCostChart()`/`renderMarketingTable()` functions still being called in `init()`. This
+produced two versions of each panel on the page, one empty. Removed the old implementation
+entirely rather than merging the two.
+
+Also caught a CSS bug in the new cost-structure bars: `.cost-bar-track` and `.cost-bar-fill`
+were `<span>` elements, which default to `display: inline` in CSS -- meaning the `width`
+styles that make the bars proportional were being silently ignored, rendering every bar at
+the same length regardless of its actual value. Fixed by setting `display: block` explicitly.
+Both issues were caught by rendering the page in a real headless browser and inspecting the
+actual output, not by reading the code and assuming it worked.
+
+## Fourth pass: full re-audit and two more exhibits surfaced
+
+Before calling this finished, we asked for the live *deployed* site to be checked directly
+(not just the local files) -- fetched the production `data/lumen_model.json` and grepped it
+for any Water Under Pressure terms (none found), and re-confirmed segments, competitors,
+COGS and CAC all match the LUMEN exhibits exactly. Also checked the checklist's literal
+`prompts/<your-id>/session-*.md` path, which never existed since Codex's automatic logging
+was never triggered -- added `prompts/e261530/session-01.md` pointing back to this file, so
+both the letter and the spirit of that requirement are covered.
+
+Two more exhibits were computed in the model but never actually rendered:
+
+1. **`marketing_funnel_monthly.csv`'s per-channel breakdown** -- only the *blended* €44 CAC
+   was shown anywhere. The real per-channel spread is meaningful: none of LUMEN's 4
+   marketing channels individually clears the 3:1 LTV:CAC ratio the plan assumes (they range
+   2.69:1 to 2.90:1), and the channel with the best ratio (Retail Sampling) also has the
+   highest CAC and the highest LTV -- a genuine "expensive but worth it" case, not
+   automatically the one to cut. Added as its own table.
+
+2. **`cost_breakdown.csv`'s 5 real cost lines** -- previously only the €0.62 COGS total was
+   used; the components behind it (ingredients, packaging, co-packing, freight, and a line
+   literally called "Germany import duty & compliance allowance") were computed but invisible.
+   Surfacing this also reinforces that Germany was never a variable to choose -- the case's
+   own cost structure has a Germany-specific line item baked in.
+
+Two smaller, previously-unused fields were also surfaced: the home markets' actual
+DTC/Retail/Gym channel split (added as a one-line comparison next to the channel-mix
+sliders), and the ~15% unit lift NL/DK/SE sees in promo weeks (added as a note tying
+together the Students segment's own "I'll buy on promo" quote and PulsUp's frequent
+discounting, both already shown elsewhere in the tool).
+
