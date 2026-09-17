@@ -318,6 +318,51 @@ svg { width: 100%; height: auto; display: block; }
 .voice-tag.negative { background: var(--clay-soft); color: var(--clay); }
 .voice-line p { margin: 0; font-size: 0.82rem; font-style: italic; color: var(--ink); }
 
+.cost-bars { display: flex; flex-direction: column; gap: 10px; }
+.cost-row { display: grid; grid-template-columns: 220px 1fr 70px; align-items: center; gap: 10px; font-size: 0.82rem; }
+.cost-row .cost-label { color: var(--ink-soft); }
+.cost-row .cost-bar-track { background: var(--line); height: 10px; position: relative; display: block; width: 100%; }
+.cost-row .cost-bar-fill { background: var(--botanical); height: 100%; display: block; }
+.cost-row .cost-value { text-align: right; font-weight: 600; color: var(--ink); }
+
+.marketing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.marketing-card {
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  padding: 14px 16px;
+  border-left: 3px solid var(--line-strong);
+}
+.marketing-card.best { border-left-color: var(--botanical); }
+.marketing-card h3 { font-size: 0.88rem; margin: 0 0 8px; }
+.marketing-card .ratio { font-family: var(--serif); font-size: 1.3rem; margin: 0 0 4px; }
+.marketing-card p { margin: 2px 0; font-size: 0.76rem; color: var(--ink-soft); }
+
+.mkt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+.mkt-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.mkt-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.mkt-table td.num { font-family: var(--serif); }
+.mkt-table tr.best-ratio td { color: var(--botanical); font-weight: 600; }
+
 .footer {
   padding: 20px clamp(20px, 4vw, 56px) 40px;
   border-top: 1px solid var(--line-strong);

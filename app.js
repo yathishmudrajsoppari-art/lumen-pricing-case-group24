@@ -351,6 +351,42 @@ function renderVoiceOfCustomer() {
   }).join("");
 }
 
+function renderCostBreakdown() {
+  const container = document.getElementById("cost-bars");
+  const maxCost = Math.max(...MODEL.cost_breakdown.map(c => c.cost_per_unit_eur));
+  container.innerHTML = MODEL.cost_breakdown.map((c) => `
+    <div class="cost-row">
+      <span class="cost-label">${c.cost_component}</span>
+      <span class="cost-bar-track"><span class="cost-bar-fill" style="width:${(c.cost_per_unit_eur/maxCost*100).toFixed(0)}%"></span></span>
+      <span class="cost-value">€${c.cost_per_unit_eur.toFixed(2)}</span>
+    </div>
+  `).join("") + `<p class="hint" style="margin-top:6px">Total: €${MODEL.cogs_per_unit_eur.toFixed(2)} per unit — this is what "contribution per unit" above is already netted against.</p>`;
+}
+
+function renderMarketingChannels() {
+  const grid = document.getElementById("marketing-grid");
+  const best = Math.max(...MODEL.marketing_channels.map(c => c.ltv_cac_ratio));
+  grid.innerHTML = MODEL.marketing_channels.map((c) => `
+    <div class="marketing-card ${c.ltv_cac_ratio === best ? 'best' : ''}">
+      <h3>${c.channel}</h3>
+      <p class="ratio">${c.ltv_cac_ratio.toFixed(2)}:1 LTV:CAC</p>
+      <p>€${c.blended_cac} CAC · €${c.avg_ltv.toFixed(0)} LTV</p>
+      <p>${c.total_conversions.toLocaleString()} customers · ${c.conv_rate_of_reach_pct}% of reach converts</p>
+    </div>
+  `).join("");
+}
+
+function renderHomeMixReference() {
+  const h = MODEL.channel_mix_home_markets_pct;
+  document.getElementById("home-mix-reference").textContent =
+    `For reference, NL/DK/SE actually sell ${h["DTC Online"]}% DTC · ${h["Retail/Grocery"]}% Retail · ${h["Gym & Office"]}% Gym/Office today.`;
+}
+
+function renderPromoLiftNote() {
+  document.getElementById("promo-lift-note").textContent =
+    `Home markets sell ${MODEL.promo_lift_pct}% more units, on average, in weeks with an active promo. Combined with the Students segment's own "I'll grab it on promo" behavior and PulsUp's frequent discounting, a short introductory promo in the Retail channel at launch is worth considering as a trial-driver — without repositioning the everyday price.`;
+}
+
 function reconciliation() {
   const container = document.getElementById("reconciliation");
   const uw = MODEL.segments["Urban Wellness Professionals"];
@@ -491,9 +527,17 @@ async function init() {
   renderMethodologyNotes();
   renderCityChart();
   renderVoiceOfCustomer();
+  renderCostBreakdown();
+  renderMarketingChannels();
+  renderHomeMixReference();
+  renderPromoLiftNote();
   reconciliation();
   wireControls();
   renderAll();
+
+  const hm = MODEL.channel_mix_home_markets_pct;
+  document.getElementById("home-market-mix-note").textContent =
+    `Home markets (NL/DK/SE) actually split: DTC ${hm["DTC Online"].toFixed(0)}% · Retail ${hm["Retail/Grocery"].toFixed(0)}% · Gym/Office ${hm["Gym & Office"].toFixed(0)}%.`;
 }
 
 init();
